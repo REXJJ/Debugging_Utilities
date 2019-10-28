@@ -4,6 +4,10 @@
 #include <chrono>
 #include <stdio.h>
 
+/*****************************************************************/
+//Color Definitions
+/****************************************************************/
+
 #define _NORMAL_    "\x1b[0m"
 #define _BLACK_     "\x1b[30;47m"
 #define _RED_       "\x1b[31;40m"
@@ -22,9 +26,13 @@
 #define _BCYAN_     "\x1b[1;36;40m"
 #define _BWHITE_    "\x1b[1;37;40m"
 
+/******************************************************************/
+//Print Utilities for debugging.
+/*******************************************************************/
+
 #define dbg_color(...) do { printf(__VA_ARGS__); } while(0)
 
-#define dbg(mode,...)                                                    \
+#define dbg(...)                                                    \
     do {                                                                 \
     	  printf("DBG: %s:%d %s():",__FILE__,__LINE__,__func__);         \
     	  printf(__VA_ARGS__);                                           \
@@ -38,9 +46,23 @@
      	      dbg_color(_NORMAL_);                                        \
      	} while(0)
 
-
+//Python like print function.
+#define print(args...) { string s = #args; replace(s.begin(), s.end(), ',', ' '); stringstream ss(s); istream_iterator<string> it(ss); err(it, args); }
+void err(istream_iterator<string> it) {}
+template<typename T, typename... Args>
+void err(istream_iterator<string> it, T a, Args... args) {
+  dbg_color(_RED);
+  cerr << *it << " = " << a << endl;
+  err(++it, args...);
+  dbg_color(_NORMAL);
+}
+/******************************************************************/
+//Functions to find the running time of code blocks.
+/*******************************************************************/
 
 #define tic() std::chrono::high_resolution_clock::time_point END_TIME,START_TIME=std::chrono::high_resolution_clock::now()
+
+#define reset() START_TIME=std::chrono::high_resolution_clock::now()
 
 
 #define toc()                                                       \
