@@ -131,9 +131,6 @@ void debug(){}
 template<typename T,typename... Args>
 void debug(T Contents, Args... args) {print(Contents);debug(args...);}
 
-#define expect(expr) if(expr==false) cerr << "Assertion " << #expr \
-" failed at " << __FILE__ << ":" << __LINE__ << endl;
-
 /******************************************************************/
 //Functions to find the running time of code blocks.
 /*******************************************************************/
@@ -141,7 +138,6 @@ void debug(T Contents, Args... args) {print(Contents);debug(args...);}
 #define tic() std::chrono::high_resolution_clock::time_point END_TIME,START_TIME=std::chrono::high_resolution_clock::now()
 
 #define reset() START_TIME=std::chrono::high_resolution_clock::now()
-
 
 #define toc()                                                       \
            do {                                                          \
@@ -161,5 +157,8 @@ void debug(T Contents, Args... args) {print(Contents);debug(args...);}
 int sum() { return 0;}
 template<typename T,typename... Args>
 T sum(T a, Args... args) { return a+sum(args...);}
+
+#define expect(expression) if(expression==false) std::cerr << "Assertion " << #expression \
+" failed at " << __FILE__ << ":" << __LINE__ << std::endl;
 
 #endif

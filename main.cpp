@@ -3,7 +3,6 @@
 #include <map>
 #include "debugging_utilities.hpp"
 
-using namespace std;
 
 struct loc
 {
@@ -20,7 +19,7 @@ int main()
 	int x=sum(1,2,3,4,5);
 	print(x);
 	int b=45;
-	vector<int> a;
+	std::vector<int> a;
 	rep(i,2,10)
 	{
 		a.push_back(i);
@@ -31,7 +30,7 @@ int main()
     std::unordered_set<std::string> animals = {"cat","dog","dinosaurs"};
     print(marks);
     debug(marks,a,x,b,alphabets,animals);
-    vector<loc> locations;
+    std::vector<loc> locations;
     locations.push_back(loc{0,0});
     locations.push_back(loc{1,1});
     print(locations);
