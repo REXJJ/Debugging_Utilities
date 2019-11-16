@@ -1,36 +1,40 @@
 #include <bits/stdc++.h>
+#include <string>
+#include <map>
+#include "debugging_utilities.hpp"
 
 using namespace std;
 
-int sum() { return 0;}
-template<typename T,typename... Args>
-T sum(T a, Args... args) { return a+sum(args...);}
+struct loc
+{
+    int x,y;
+};
 
-#define print(args...) { string s = #args; replace(s.begin(), s.end(), ',', ' '); stringstream ss(s); istream_iterator<string> it(ss); err(it, args); }
-
-void err(istream_iterator<string> it) {}
-template<typename T, typename... Args>
-void err(istream_iterator<string> it, T a, Args... args) {
-	cerr << *it << " = " << a << endl;
-	err(++it, args...);
+std::ostream& operator<< (std::ostream& out, const loc l) {
+    out<<"x: "<<l.x<<" "<<"y: "<<l.y;
+    return out;
 }
-
-#define rep(i,begin, end) for (__typeof(end) i = (begin) - ((begin) > (end)); i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
 
 int main()
 {
 	int x=sum(1,2,3,4,5);
 	print(x);
 	int b=45;
-	print(x,b);
 	vector<int> a;
 	rep(i,2,10)
 	{
 		a.push_back(i);
 	}
-	rep(i,0,a.size())
-	{
-		print(a[i]);
-	}
+    print(a);
+    std::map<std::string,int> marks = { {"CSCI567",100}, {"CSCI561",100}, {"CSCI570",100} };
+    std::unordered_map<std::string,int> alphabets={{"A",0},{"B",1}};
+    std::unordered_set<std::string> animals = {"cat","dog","dinosaurs"};
+    print(marks);
+    debug(marks,a,x,b,alphabets,animals);
+    vector<loc> locations;
+    locations.push_back(loc{0,0});
+    locations.push_back(loc{1,1});
+    print(locations);
+    expect(b==x+10);
 	return 0;
 }
