@@ -29,18 +29,18 @@
 /*******************************************************************/
 #define dbg_color(...) do { printf(__VA_ARGS__); } while(0)
 
-#define dbg(...)                                                    \
+#define dbg(...)                                                     \
 do {                                                                 \
 	  printf("DBG: %s:%d %s():",__FILE__,__LINE__,__func__);         \
 	  printf(__VA_ARGS__);                                           \
-	  printf("%s", _NORMAL_);              \
+	  printf("%s", _NORMAL_);                                        \
 } while(0)
 
-#define whereami()                                                       \
+#define whereami()                                                   \
 do {                                                                 \
         dbg_color(_MAGENTA_);                                        \
- 	      printf("HERE: %s:%d %s()\n",__FILE__,__LINE__,__func__);       \
- 	      dbg_color(_NORMAL_);                                        \
+ 	      printf("HERE: %s:%d %s()\n",__FILE__,__LINE__,__func__);   \
+ 	      dbg_color(_NORMAL_);                                       \
  	} while(0)
 
 #ifdef NDEBUG
@@ -51,7 +51,8 @@ do {                                                                 \
 
 //<< Overloading for map
 template<typename T1, typename T2>
-std::ostream& operator<< (std::ostream& out, const std::map<T1,T2> &M) {
+std::ostream& operator<< (std::ostream& out, const std::map<T1,T2> &M) 
+{
     int count=0;
     out << "{ ";
     auto it=M.begin();
@@ -67,7 +68,8 @@ std::ostream& operator<< (std::ostream& out, const std::map<T1,T2> &M) {
 }
 //<< Overloading for unordered_map
 template<typename T1, typename T2>
-std::ostream& operator<< (std::ostream& out, const std::unordered_map<T1,T2> &M) {
+std::ostream& operator<< (std::ostream& out, const std::unordered_map<T1,T2> &M)
+{
     int count=0;
     out << "{ ";
     auto it=M.begin();
@@ -83,7 +85,8 @@ std::ostream& operator<< (std::ostream& out, const std::unordered_map<T1,T2> &M)
 }
 //<< Overloading for set
 template<typename T>
-std::ostream& operator<< (std::ostream& out, const std::set<T> &M) {
+std::ostream& operator<< (std::ostream& out, const std::set<T> &M)
+{
     int count=0;
     out << "{ ";
     auto it=M.begin();
@@ -99,7 +102,8 @@ std::ostream& operator<< (std::ostream& out, const std::set<T> &M) {
 }
 //<< Overloading for set
 template<typename T>
-std::ostream& operator<< (std::ostream& out, const std::unordered_set<T> &M) {
+std::ostream& operator<< (std::ostream& out, const std::unordered_set<T> &M) 
+{
     int count=0;
     out << "{ ";
     auto it=M.begin();
@@ -115,7 +119,8 @@ std::ostream& operator<< (std::ostream& out, const std::unordered_set<T> &M) {
 }
 //<< Overloading for vector
 template<typename T>
-std::ostream& operator<< (std::ostream& out, const std::vector<T> M) {
+std::ostream& operator<< (std::ostream& out, const std::vector<T> M)
+{
     out << "{ ";
     for (int i=0;i<M.size()-1;i++)
     {
@@ -139,14 +144,15 @@ void debug(T Contents, Args... args) {print(Contents);debug(args...);}
 
 #define reset() START_TIME=std::chrono::high_resolution_clock::now()
 
-#define toc()                                                       \
-           do {                                                          \
-           	      dbg_color(_GREEN_);                                    \
-                  END_TIME=std::chrono::high_resolution_clock::now();    \
-                  std::cout << " Time elapsed in "<<__func__<<"() : "      \
-                  << std::chrono::duration_cast<std::chrono::microseconds>(END_TIME - START_TIME).count() << " microseconds.\n"; \
-                  dbg_color(_NORMAL_);                                   \
-              }while(0)
+#define toc()                                                   \
+do                                                              \
+{                                                               \
+	dbg_color(_GREEN_);                                         \
+    END_TIME=std::chrono::high_resolution_clock::now();         \
+    std::cout << " Time elapsed in "<<__func__<<"() : "         \
+    << std::chrono::duration_cast<std::chrono::microseconds>(END_TIME - START_TIME).count() << " microseconds.\n"; \
+    dbg_color(_NORMAL_);                                        \
+}while(0)
 
 /**********************************************************************/
 //Other Utilities...
