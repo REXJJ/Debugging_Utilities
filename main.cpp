@@ -3,6 +3,7 @@
 #include <map>
 #include "debugging_utilities.hpp"
 
+using namespace std;
 
 struct loc
 {
@@ -13,6 +14,7 @@ std::ostream& operator<< (std::ostream& out, const loc l) {
     out<<"x: "<<l.x<<" "<<"y: "<<l.y;
     return out;
 }
+
 
 int main()
 {
@@ -36,6 +38,7 @@ int main()
     disp(marks);
 	disp(x);
     disp(map_vec);
+    disp(marks,a,x,b,alphabets,animals);
     print("Outputs of print:");
     print(locations);
     print(a);

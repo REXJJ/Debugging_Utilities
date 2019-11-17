@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <bits/stdc++.h>
 #include <string>
+
+using namespace std;
 /*****************************************************************/
 //Color Definitions
 /****************************************************************/
@@ -43,11 +45,20 @@ do {                                                                 \
  	      dbg_color(_NORMAL_);                                       \
  	} while(0)
 
-#ifdef NDEBUG
-#define disp(var)
-#else
-#define disp(var) { std::cout << #var << ": " << (var) << std::endl; }
-#endif
+// #ifdef NDEBUG
+// #define disp(var)
+// #else
+// #define disp(var) { std::cout << #var << ": " << (var) << std::endl; }
+// #endif
+
+#define disp(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); disp_helper(_it, args); }
+
+void disp_helper(istream_iterator<string> it) {}
+template<typename T, typename... Args>
+void disp_helper(istream_iterator<string> it, T a, Args... args) {
+    std::cout << *it << " = " << a << endl;
+    disp_helper(++it, args...);
+}
 
 //<< Overloading for map
 template<typename T1, typename T2>
