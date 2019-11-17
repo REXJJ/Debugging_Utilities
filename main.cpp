@@ -34,6 +34,6 @@ int main()
     locations.push_back(loc{0,0});
     locations.push_back(loc{1,1});
     print(locations);
-    expect(b==x+10);
+    expect((b-x+10)*50==100);
 	return 0;
 }
