@@ -49,6 +49,12 @@ do {                                                                 \
 #define disp(var) { std::cout << #var << ": " << (var) << std::endl; }
 #endif
 
+#ifdef NDEBUG
+#define print(var)
+#else
+#define print(var) { std::cout<< (var) << std::endl; }
+#endif
+
 //<< Overloading for map
 template<typename T1, typename T2>
 std::ostream& operator<< (std::ostream& out, const std::map<T1,T2> &M) 
@@ -132,9 +138,9 @@ std::ostream& operator<< (std::ostream& out, const std::vector<T> M)
 
 //A more "Pythonic" way to print stuffs.
 
-void print(){}
+void debug(){}
 template<typename T,typename... Args>
-void print(T Contents, Args... args) {std::cout<< (Contents) << std::endl;print(args...);}
+void debug(T Contents, Args... args) {print(Contents);debug(args...);}
 
 /******************************************************************/
 //Functions to find the running time of code blocks.

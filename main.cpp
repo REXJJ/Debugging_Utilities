@@ -36,10 +36,11 @@ int main()
     disp(marks);
 	disp(x);
     disp(map_vec);
-    print("Outputs of print:");
+    std::cout<<"Output of print: \n";
     print(locations);
     print(a);
-    print(marks,a,x,b,alphabets,animals);
+    std::cout<<"Output of debug: \n";
+    debug(marks,a,x,b,alphabets,animals);
     expect((b-x+10)*50==100);
 	return 0;
 }
