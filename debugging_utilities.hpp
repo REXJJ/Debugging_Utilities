@@ -54,7 +54,7 @@ template<typename T1, typename T2>
 std::ostream& operator<< (std::ostream& out, const std::map<T1,T2> &M) 
 {
     int count=0;
-    out << "{ ";
+    out << "Map: { ";
     auto it=M.begin();
     for (;it!=M.end();it++)
     {
@@ -71,7 +71,7 @@ template<typename T1, typename T2>
 std::ostream& operator<< (std::ostream& out, const std::unordered_map<T1,T2> &M)
 {
     int count=0;
-    out << "{ ";
+    out << "Map: { ";
     auto it=M.begin();
     for (;it!=M.end();it++)
     {
@@ -88,7 +88,7 @@ template<typename T>
 std::ostream& operator<< (std::ostream& out, const std::set<T> &M)
 {
     int count=0;
-    out << "{ ";
+    out << "Set: { ";
     auto it=M.begin();
     for (;it!=M.end();it++)
     {
@@ -105,7 +105,7 @@ template<typename T>
 std::ostream& operator<< (std::ostream& out, const std::unordered_set<T> &M) 
 {
     int count=0;
-    out << "{ ";
+    out << "Set: { ";
     auto it=M.begin();
     for (;it!=M.end();it++)
     {
@@ -121,7 +121,7 @@ std::ostream& operator<< (std::ostream& out, const std::unordered_set<T> &M)
 template<typename T>
 std::ostream& operator<< (std::ostream& out, const std::vector<T> M)
 {
-    out << "{ ";
+    out << "Vector: { ";
     for (int i=0;i<M.size()-1;i++)
     {
         out << i << "->" << M[i] << ", ";
