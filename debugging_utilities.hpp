@@ -44,9 +44,15 @@ do {                                                                 \
  	} while(0)
 
 #ifdef NDEBUG
+#define disp(var)
+#else
+#define disp(var) { std::cout << #var << ": " << (var) << std::endl; }
+#endif
+
+#ifdef NDEBUG
 #define print(var)
 #else
-#define print(var) { std::cout << #var << ": " << (var) << std::endl; }
+#define print(var) { std::cout<< (var) << std::endl; }
 #endif
 
 //<< Overloading for map
