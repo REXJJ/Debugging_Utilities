@@ -45,12 +45,6 @@ do {                                                                 \
  	      dbg_color(_NORMAL_);                                       \
  	} while(0)
 
-// #ifdef NDEBUG
-// #define disp(var)
-// #else
-// #define disp(var) { std::cout << #var << ": " << (var) << std::endl; }
-// #endif
-
 #define disp(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); disp_helper(_it, args); }
 
 void disp_helper(istream_iterator<string> it) {}
@@ -66,14 +60,17 @@ std::ostream& operator<< (std::ostream& out, const std::map<T1,T2> &M)
 {
     int count=0;
     out << "Map: { ";
-    auto it=M.begin();
-    for (;it!=M.end();it++)
+    if(M.begin()!=M.end())
     {
-        out << it->first << "->" << it->second << ", ";
-        if(++count==M.size()-1) break;
+        auto it=M.begin();
+        for (;it!=M.end();it++)
+        {
+            out << it->first << "->" << it->second << ", ";
+            if(++count==M.size()-1) break;
+        }
+        it++;
+        out<<it->first<< "->" <<it->second;
     }
-    it++;
-    out<<it->first<< "->" <<it->second;
     out << " }";
     return out;
 }
@@ -84,13 +81,16 @@ std::ostream& operator<< (std::ostream& out, const std::unordered_map<T1,T2> &M)
     int count=0;
     out << "Map: { ";
     auto it=M.begin();
-    for (;it!=M.end();it++)
+    if(M.begin()!=M.end())
     {
-        out << it->first << "->" << it->second << ", ";
-        if(++count==M.size()-1) break;
+        for (;it!=M.end();it++)
+        {
+            out << it->first << "->" << it->second << ", ";
+            if(++count==M.size()-1) break;
+        }
+        it++;
+        out<<it->first<< "->" <<it->second;
     }
-    it++;
-    out<<it->first<< "->" <<it->second;
     out << " }";
     return out;
 }
@@ -101,13 +101,16 @@ std::ostream& operator<< (std::ostream& out, const std::set<T> &M)
     int count=0;
     out << "Set: { ";
     auto it=M.begin();
-    for (;it!=M.end();it++)
+    if(M.begin()!=M.end())
     {
-        out <<*it<< ", ";
-        if(++count==M.size()-1) break;
+        for (;it!=M.end();it++)
+        {
+            out <<*it<< ", ";
+            if(++count==M.size()-1) break;
+        }
+        it++;
+        out<<*it;
     }
-    it++;
-    out<<*it;
     out << " }";
     return out;
 }
@@ -117,14 +120,17 @@ std::ostream& operator<< (std::ostream& out, const std::unordered_set<T> &M)
 {
     int count=0;
     out << "Set: { ";
-    auto it=M.begin();
-    for (;it!=M.end();it++)
-    {
-        out <<*it<< ", ";
-        if(++count==M.size()-1) break;
+    if(M.begin()!=M.end())
+        {
+        auto it=M.begin();
+        for (;it!=M.end();it++)
+        {
+            out <<*it<< ", ";
+            if(++count==M.size()-1) break;
+        }
+        it++;
+        out<<*it;
     }
-    it++;
-    out<<*it;
     out << " }";
     return out;
 }
@@ -133,11 +139,15 @@ template<typename T>
 std::ostream& operator<< (std::ostream& out, const std::vector<T> M)
 {
     out << "Vector: { ";
-    for (int i=0;i<M.size()-1;i++)
+    if(M.size())
     {
-        out << i << "->" << M[i] << ", ";
+        for (int i=0;i<M.size()-1;i++)
+        {
+            out << i << "->" << M[i] << ", ";
+        }
+        out<<M.size()-1<<"->" <<M[M.size()-1];
     }
-    out<<M.size()-1<<"->" <<M[M.size()-1]<< " }";
+    out<< " }";
     return out;
 }
 
