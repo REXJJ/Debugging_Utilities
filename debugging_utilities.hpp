@@ -58,7 +58,6 @@ void disp_helper(istream_iterator<string> it, T a, Args... args) {
 template<typename T1, typename T2>
 std::ostream& operator<< (std::ostream& out, const std::map<T1,T2> &M) 
 {
-    int count=0;
     out << "Map: { ";
     if(M.begin()!=M.end())
     {
@@ -66,19 +65,15 @@ std::ostream& operator<< (std::ostream& out, const std::map<T1,T2> &M)
         for (;it!=M.end();it++)
         {
             out << it->first << "->" << it->second << ", ";
-            if(++count==M.size()-1) break;
         }
-        it++;
-        out<<it->first<< "->" <<it->second;
     }
-    out << " }";
+    out << "\b\b \b }";
     return out;
 }
 //<< Overloading for unordered_map
 template<typename T1, typename T2>
 std::ostream& operator<< (std::ostream& out, const std::unordered_map<T1,T2> &M)
 {
-    int count=0;
     out << "Map: { ";
     auto it=M.begin();
     if(M.begin()!=M.end())
@@ -86,19 +81,15 @@ std::ostream& operator<< (std::ostream& out, const std::unordered_map<T1,T2> &M)
         for (;it!=M.end();it++)
         {
             out << it->first << "->" << it->second << ", ";
-            if(++count==M.size()-1) break;
         }
-        it++;
-        out<<it->first<< "->" <<it->second;
     }
-    out << " }";
+    out << "\b\b \b }";
     return out;
 }
 //<< Overloading for set
 template<typename T>
 std::ostream& operator<< (std::ostream& out, const std::set<T> &M)
 {
-    int count=0;
     out << "Set: { ";
     auto it=M.begin();
     if(M.begin()!=M.end())
@@ -106,19 +97,15 @@ std::ostream& operator<< (std::ostream& out, const std::set<T> &M)
         for (;it!=M.end();it++)
         {
             out <<*it<< ", ";
-            if(++count==M.size()-1) break;
         }
-        it++;
-        out<<*it;
     }
-    out << " }";
+    out << "\b\b \b }";
     return out;
 }
 //<< Overloading for set
 template<typename T>
 std::ostream& operator<< (std::ostream& out, const std::unordered_set<T> &M) 
 {
-    int count=0;
     out << "Set: { ";
     if(M.begin()!=M.end())
         {
@@ -126,12 +113,9 @@ std::ostream& operator<< (std::ostream& out, const std::unordered_set<T> &M)
         for (;it!=M.end();it++)
         {
             out <<*it<< ", ";
-            if(++count==M.size()-1) break;
         }
-        it++;
-        out<<*it;
     }
-    out << " }";
+    out << "\b\b \b }";
     return out;
 }
 //<< Overloading for vector
@@ -141,13 +125,12 @@ std::ostream& operator<< (std::ostream& out, const std::vector<T> M)
     out << "Vector: { ";
     if(M.size())
     {
-        for (int i=0;i<M.size()-1;i++)
+        for (int i=0;i<M.size();i++)
         {
             out << i << "->" << M[i] << ", ";
         }
-        out<<M.size()-1<<"->" <<M[M.size()-1];
     }
-    out<< " }";
+    out << "\b\b \b }";
     return out;
 }
 
